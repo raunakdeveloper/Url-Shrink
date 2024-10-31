@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shortened URL</title>
+</head>
+<body>
+    <h1>Shortened URL</h1>
+
+    {% if message %}
+    <p>{{ message }}</p>
+    {% endif %}
+    
+    <p>Your shortened URL: <a href="{{ short_url }}">{{ short_url }}</a></p>
+    
+    <a href="/">Go back</a>
+</body>
+</html>

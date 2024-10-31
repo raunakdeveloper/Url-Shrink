@@ -1,0 +1,30 @@
+# Ignore Python cache files
+__pycache__/
+*.pyc
+*.pyo
+
+# Ignore virtual environment folder (if any)
+venv/
+env/
+
+# Ignore environment variable file
+.env
+
+# Ignore system files
+.DS_Store
+Thumbs.db
+
+# Ignore Vercel-specific configuration files
+.vercel/
+
+# Ignore Python dependencies
+*.egg-info/
+*.eggs/
+
+*.log
+
+.vscode/
+.idea/
+*.swp
+*.swo
+*.swn
