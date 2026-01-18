@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        padding: 4rem;
+      }
+      .login-btn {
+        margin-top: 20px;
+        padding: 3px 8px;
+        cursor: pointer;
+      }
+      .error {
+        color: red; /* Style for error messages */
+        margin-bottom: 10px;
+      }
+    </style>
+</head>
+<body>
+    <h1>Login</h1>
+    {% if error %}
+        <div class="error">{{ error }}</div> <!-- Display the error message -->
+    {% endif %}
+    <form method="POST">
+      <table>
+        <tr>
+          <td><label>Email:</label></td>
+          <td><input type="email" name="email" required /></td>
+        </tr>
+        <tr>
+          <td><label>Password:</label></td>
+          <td><input type="password" name="password" required /></td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <button class="login-btn" type="submit">Login</button>
+          </td>
+        </tr>
+      </table>
+    </form>
+    <p><a href="/register">Don't have an account? Register here</a></p>
+</body>
+</html>

@@ -1,19 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Shortened URL</title>
-</head>
-<body>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        padding: 4rem;
+      }
+      a {
+        text-decoration: none;
+        color: #007bff;
+      }
+      .home-link {
+        margin-top: 2rem;
+        cursor: pointer;
+      }
+    </style>
+    <script>
+      function copyToClipboard() {
+        const url = document.getElementById('short-url').textContent;
+        navigator.clipboard.writeText(url).then(() => {
+          alert('URL copied to clipboard!');
+        }, (err) => {
+          console.error('Could not copy URL: ', err);
+        });
+      }
+    </script>
+  </head>
+  <body>
     <h1>Shortened URL</h1>
-
-    {% if message %}
-    <p>{{ message }}</p>
-    {% endif %}
-    
-    <p>Your shortened URL: <a href="{{ short_url }}">{{ short_url }}</a></p>
-    
-    <a href="/">Go back</a>
-</body>
+    <p>{{ message if message else 'Your shortened URL is:' }}</p>
+    <a href="{{ short_url }}" target="_blank" id="short-url">{{ short_url }}</a>
+    &nbsp; &nbsp;
+    <button onclick="copyToClipboard()">Copy</button>
+    <br />
+    <form action="/" method="get">
+      <button class="home-link" type="submit">Back to Home</button>
+    </form>
+  </body>
 </html>

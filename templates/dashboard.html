@@ -1,13 +1,19 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Display Shortened URLs</title>
+    <title>Dashboard</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             margin: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        a {
+            color: #007bff;
         }
         table {
             width: 100%;
@@ -28,24 +34,29 @@
         }
 
         .displayBtn {
-            margin-top: 20px; /* Adds margin above */
+            margin-top: 20px;
             padding: 10px 20px;
             cursor: pointer;
             border-radius: 5px;
             border: 1px solid #666666;
-            background-color: #E5E5E5; /* Neutral background color */
+            background-color: #E5E5E5;
             font-size: 16px;
             display: block;
             width: 120px;
             text-align: center;
-            margin-left: auto;
+            margin: 0 10px;
             text-decoration: none;
-            margin-right: auto;
-            cursor: pointer;
         }
 
         form button {
             cursor: pointer;
+        }
+
+        .bottom-btn {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 40px;
         }
 
         /* Media query for smaller screens */
@@ -82,35 +93,44 @@
     </style>
 </head>
 <body>
-    <h2>All Shortened URLs (Total: {{ total_urls }})</h2>
-    <table>
-        <thead>
-            <tr>
-                <th>#</th>
-                <th>Short URL</th>
-                <th>Original URL</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for url in urls %}
-            <tr>
-                <td data-label="S.No">{{ loop.index }}</td>
-                <td data-label="Short URL">
-                    <a href="{{ request.host_url }}{{ url.short_hash }}" target="_blank">
-                        {{ request.host_url }}{{ url.short_hash }}
-                    </a>
-                </td>
-                <td data-label="Original URL">{{ url.original_url }}</td>
-                <td data-label="Actions">
-                    <form action="/delete/{{ url.short_hash }}" method="POST" style="display:inline;">
-                        <button type="submit">Delete</button>
-                    </form>
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-    <a href="/" class="displayBtn">Go Back</a>
+    <h1>Dashboard</h1>
+    <p>Welcome, {{ user.username }}!</p>
+    
+    <h2>Your Shortened URLs</h2>
+    <h3>Total URLs shortened : {{ total_urls }}</h3>
+    
+    {% if urls|length > 0 %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Original URL</th>
+                    <th>Shortened URL</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for url in urls %}
+                    <tr>
+                        <td data-label="Original URL">{{ url.original_url }}</td>
+                        <td data-label="Shortened URL">
+                            <a href="{{ request.host_url }}{{ url.short_hash }}">{{ request.host_url }}{{ url.short_hash }}</a>
+                        </td>
+                        <td data-label="Actions">
+                            <form action="/delete/{{ url.short_hash }}" method="POST" style="display:inline;">
+                                <button type="submit">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>You have not shortened any URLs yet.</p>
+    {% endif %}
+    
+    <div class="bottom-btn">
+        <a href="/" class="displayBtn">Home</a>
+        <a href="/logout" class="displayBtn">Logout</a>
+    </div>
 </body>
 </html>
