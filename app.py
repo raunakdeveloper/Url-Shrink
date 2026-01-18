@@ -16,7 +16,7 @@ load_dotenv()
 app = Flask(__name__)
 
 # MongoDB configuration
-app.config['MONGO_URI'] = f"mongodb+srv://{os.environ.get('MONGO_USER')}:{os.environ.get('MONGO_PASS')}@url-short-python.br0gv.mongodb.net/url-login-database?retryWrites=true&w=majority"
+app.config["MONGO_URI"] = os.environ.get("MONGO_URI")
 mongo = PyMongo(app)
 
 # Session config
