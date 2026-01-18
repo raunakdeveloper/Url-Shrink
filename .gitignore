@@ -4,6 +4,7 @@ __pycache__/
 *.pyo
 
 # Ignore virtual environment folder (if any)
+flask_session/
 venv/
 env/
 

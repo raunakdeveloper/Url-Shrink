@@ -20,9 +20,7 @@ app.config["MONGO_URI"] = os.environ.get("MONGO_URI")
 mongo = PyMongo(app)
 
 # Session config
-app.config['SESSION_TYPE'] = 'filesystem'
 app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
-Session(app)
 
 # OTP generation and email configuration
 def generate_otp():
